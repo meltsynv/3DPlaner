@@ -1,0 +1,44 @@
+.vs/
+.idea/
+3D_Planer_Unity/.idea/
+3D_Planer_Unity/Library/
+3D_Planer_Unity/Logs/
+3D_Planer_Unity/obj/
+3D_Planer_Unity/Packages/
+3D_Planer_Unity/Temp/
+3D_Planer_Unity/Assets/AssetStoreTools*
+
+# ===========================
+# Default Collab Ignore Rules
+# ===========================
+
+# OS Generated
+# ============
+3D_Planer_Unity/.DS_Store
+3D_Planer_Unity/._*
+3D_Planer_Unity/.Spotlight-V100
+3D_Planer_Unity/.Trashes
+3D_Planer_Unity/Icon?
+3D_Planer_Unity/ehthumbs.db
+3D_Planer_Unity/[Tt]humbs.db
+3D_Planer_Unity/[Dd]esktop.ini
+
+# Visual Studio / MonoDevelop generated
+# =====================================
+3D_Planer_Unity/[Ee]xported[Oo]bj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# Unity generated
+# ===============
+3D_Planer_Unity/[Oo]bj/
+3D_Planer_Unity/[Bb]uild
+3D_Planer_Unity/sysinfo.txt
+*.stackdump
