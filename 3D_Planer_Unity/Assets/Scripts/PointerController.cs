@@ -1,50 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PointerController : MonoBehaviour
 {
+    private bool isActive;
+    [SerializeField] private LayerMask layerMaskInteract;
     private GameObject raycastedObj;
-    private bool isDefaultColor = true;
 
     [SerializeField] private int rayLength = 10;
-    [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private Image uiCrosshair;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         RaycastHit hit;
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        var fwd = transform.TransformDirection(Vector3.forward);
 
         if (Physics.Raycast(transform.position, fwd, out hit, rayLength, layerMaskInteract.value))
         {
             if (hit.collider.CompareTag("Object"))
             {
                 raycastedObj = hit.collider.gameObject;
-                CrosshairActive();
+                SetCrosshairActive();
 
                 if (Input.GetKeyDown("e"))
                 {
-                    isDefaultColor = false;
+                    isActive = true;
                     Debug.Log("Interaction succesful");
                     Destroy(raycastedObj);
                 }
             }
         }
-        else if (!isDefaultColor)
+        else if (isActive)
         {
-            CrosshairNormal();
+            SetCrosshairNormal();
         }
     }
 
-    void CrosshairActive()
+    private void SetCrosshairActive()
     {
         uiCrosshair.color = Color.red;
     }
-    
-    void CrosshairNormal()
+
+    private void SetCrosshairNormal()
     {
         uiCrosshair.color = Color.white;
     }
