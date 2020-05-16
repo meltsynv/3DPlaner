@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class PointerController : MonoBehaviour
 {
-    private bool isActive;
-    [SerializeField] private LayerMask layerMaskInteract;
-    private GameObject raycastedObj;
+    [HideInInspector] private bool _isActive;
+
+    private GameObject _raycastedObj;
+    public Text _tooltip;
 
     [SerializeField] private int rayLength = 10;
     [SerializeField] private Image uiCrosshair;
@@ -16,22 +17,23 @@ public class PointerController : MonoBehaviour
         RaycastHit hit;
         var fwd = transform.TransformDirection(Vector3.forward);
 
-        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, layerMaskInteract.value))
+        if (Physics.Raycast(transform.position, fwd, out hit, rayLength))
         {
             if (hit.collider.CompareTag("Object"))
             {
-                raycastedObj = hit.collider.gameObject;
+                _raycastedObj = hit.collider.gameObject;
                 SetCrosshairActive();
+
+                _tooltip.text = "Mit der Taste 'E' können Sie das Element löschen.";
 
                 if (Input.GetKeyDown("e"))
                 {
-                    isActive = true;
                     Debug.Log("Interaction succesful");
-                    Destroy(raycastedObj);
+                    Destroy(_raycastedObj);
                 }
             }
         }
-        else if (isActive)
+        else if (_isActive)
         {
             SetCrosshairNormal();
         }
@@ -39,11 +41,14 @@ public class PointerController : MonoBehaviour
 
     private void SetCrosshairActive()
     {
+        _isActive = true;
         uiCrosshair.color = Color.red;
     }
 
     private void SetCrosshairNormal()
     {
+        _isActive = false;
         uiCrosshair.color = Color.white;
+        _tooltip.text = "";
     }
 }

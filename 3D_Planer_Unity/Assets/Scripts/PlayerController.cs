@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     public bool canMove = true;
 
-
     private CharacterController characterController;
     public float gravity = 20.0f;
     public float lookSpeed = 2.0f;
@@ -20,11 +19,13 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         rotation.y = transform.eulerAngles.y;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Keyboardmovement
         if (characterController.isGrounded)
         {
             var forward = transform.TransformDirection(Vector3.forward);
@@ -35,9 +36,9 @@ public class PlayerController : MonoBehaviour
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
-
         characterController.Move(moveDirection * Time.deltaTime);
 
+        // Mouseaiming
         if (canMove)
         {
             rotation.y += Input.GetAxis("Mouse X") * lookSpeed;
@@ -46,5 +47,7 @@ public class PlayerController : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotation.x, 0, 0);
             transform.eulerAngles = new Vector2(0, rotation.y);
         }
+
+        if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
     }
 }
