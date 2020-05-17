@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 2532084579263240050, guid: d0fe8864fb6902f4a9a10469190c7e1b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.55062866
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 2532084579263240050, guid: d0fe8864fb6902f4a9a10469190c7e1b,
         type: 3}
@@ -846,9 +846,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookSpeed: 2
-  speed: 7.5
   lookXLimit: 45
   playerCamera: {fileID: 963194227}
+  speed: 7.5
 --- !u!143 &1069915183
 CharacterController:
   m_ObjectHideFlags: 0
@@ -895,9 +895,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2f923bfffebf24189c1bd34dea1507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayLength: 2
   tooltip: {fileID: 620187239}
   uiCrosshair: {fileID: 1266052446}
-  rayLength: 2
+  rotationAngle: 15
 --- !u!1 &1266052444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1242,7 @@ PrefabInstance:
     - target: {fileID: 2532084579263240050, guid: d0fe8864fb6902f4a9a10469190c7e1b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 2532084579263240050, guid: d0fe8864fb6902f4a9a10469190c7e1b,
         type: 3}

@@ -7,6 +7,7 @@ public class PointerController : MonoBehaviour
     private bool isActive;
 
     [SerializeField] private float rayLength = 2f;
+    public int rotationAngle = 15;
     public Text tooltip;
     public Image uiCrosshair;
 
@@ -31,9 +32,6 @@ public class PointerController : MonoBehaviour
                 // setzt Pointer auf rot
                 if (!isActive) SetCrosshairActive();
 
-                // zeigt Tooltip an
-                tooltip.text = "Mit der Taste L können Sie das Element löschen.";
-
                 // Falls eine Box ausgewählt ist wird diese vor dem Player angeheftet um diese zu bewegen
                 if (grabbingBox != null)
                 {
@@ -41,16 +39,32 @@ public class PointerController : MonoBehaviour
                         transform.position + transform.forward * 2 + Vector3.up * 0.5f;
                     grabbingBox.transform.localEulerAngles = transform.localEulerAngles;
 
+                    tooltip.text = "Re. Maus = Element ablegen";
                     // Wenn rechte Maustaste gedrückt wird wird Objekt abgelegt
                     if (Input.GetMouseButtonDown(1)) grabbingBox = null;
                 }
                 else
                 {
+                    // zeigt Tooltip an
+                    tooltip.text = "Re. Maus = Element aufnehmen" +
+                                   "\n Taste T = Element drehen" +
+                                   "\n Taste L = Element löschen" +
+                                   "\n Taste ESC = Cursor freigeben" +
+                                   "\n Li. Maus = Cursor fangen";
+
                     // Mit Taste 'L' lassen sich Objekte löschen
                     if (Input.GetKeyDown("l"))
                     {
                         grabbingBox = hit.transform.gameObject.GetComponent<BoxController>();
                         Destroy(grabbingBox.gameObject);
+                    }
+
+                    // Mit Taste 'T' lassen sich Objekte drehen
+                    if (Input.GetKeyDown("t"))
+                    {
+                        grabbingBox = hit.transform.gameObject.GetComponent<BoxController>();
+                        grabbingBox.transform.Rotate(Vector3.up, rotationAngle);
+                        grabbingBox = null;
                     }
 
                     // Mit rechter Maustaste lassen sich Objekte bewegen
