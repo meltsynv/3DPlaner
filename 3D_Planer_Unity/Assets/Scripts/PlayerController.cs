@@ -3,6 +3,8 @@
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public bool canMove = true;
+
     private CharacterController characterController;
 
     // Geschwindigkeit der Maus, je höher, desto stärker ändert sich die Blickrichtung bei Mausbewegung
@@ -12,12 +14,10 @@ public class PlayerController : MonoBehaviour
     public float lookXLimit = 45.0f;
     private Vector3 moveDirection = Vector3.zero;
     public Camera playerCamera;
-
     private Vector2 rotation = Vector2.zero;
 
     // Laufgeschwindigkeit des Player
     public float speed = 7.5f;
-
 
     // Start is called before the first frame update
     private void Start()
@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // Falls Bewegung verhindert wird, soll sich Player nicht bewegen
+        if (!canMove) return;
+
         // Steuerung für Bewegung und Sicht
         KeyboardMove();
         MouseMove();
