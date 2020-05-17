@@ -26,11 +26,7 @@ public class PointerController : MonoBehaviour
 
                 _tooltip.text = "Mit der Taste 'E' können Sie das Element löschen.";
 
-                if (Input.GetKeyDown("e"))
-                {
-                    Debug.Log("Interaction succesful");
-                    Destroy(_raycastedObj);
-                }
+                if (Input.GetKeyDown("e")) Destroy(_raycastedObj);
             }
         }
         else if (_isActive)
