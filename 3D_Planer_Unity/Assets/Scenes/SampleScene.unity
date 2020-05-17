@@ -525,10 +525,10 @@ RectTransform:
   m_Father: {fileID: 392134875}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -342.83, y: 196.22}
-  m_SizeDelta: {x: 317.35, y: 171.55}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 158.67499, y: 0}
+  m_SizeDelta: {x: 317.34998, y: 171.54999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &620187239
 MonoBehaviour:
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: ba2485e5001c4f54591150378909af23, type: 2}
-  m_Color: {r: 0.9245283, g: 0.039248828, b: 0.36092138, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -561,7 +561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "N\xE4here dich einem Objekt um mit ihm zu interagieren."
 --- !u!222 &620187240
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -896,9 +896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 2
+  rotationAngle: 15
   tooltip: {fileID: 620187239}
   uiCrosshair: {fileID: 1266052446}
-  rotationAngle: 15
 --- !u!1 &1266052444
 GameObject:
   m_ObjectHideFlags: 0

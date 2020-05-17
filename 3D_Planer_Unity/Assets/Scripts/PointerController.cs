@@ -5,11 +5,13 @@ public class PointerController : MonoBehaviour
 {
     private BoxController grabbingBox;
     private bool isActive;
+    public PlayerController player;
 
     [SerializeField] private float rayLength = 2f;
     public int rotationAngle = 15;
     public Text tooltip;
     public Image uiCrosshair;
+    public GameObject uiOverlay;
 
     // Start is called before the first frame update
     private void Start()
@@ -46,11 +48,11 @@ public class PointerController : MonoBehaviour
                 else
                 {
                     // zeigt Tooltip an
-                    tooltip.text = "Re. Maus = Element aufnehmen" +
-                                   "\n Taste T = Element drehen" +
-                                   "\n Taste L = Element löschen" +
-                                   "\n Taste ESC = Cursor freigeben" +
-                                   "\n Li. Maus = Cursor fangen";
+                    tooltip.text = "Re. Maus = Element aufnehmen \n" +
+                                   "Taste T = Element drehen \n" +
+                                   "Taste L = Element löschen \n" +
+                                   "Taste ESC = Cursor freigeben \n" +
+                                   "Li. Maus = Cursor fangen";
 
                     // Mit Taste 'L' lassen sich Objekte löschen
                     if (Input.GetKeyDown("l"))
@@ -80,8 +82,23 @@ public class PointerController : MonoBehaviour
 
         //Beim Drücken von 'esc' wird der Mauszeiger freigegeben (kann im Debugmodus benutzt werden um diesen zu beenden)
         if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
+
         // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-        if (Input.GetMouseButtonDown(0)) Cursor.lockState = CursorLockMode.Locked;
+        if (Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            player.canMove = true;
+            uiOverlay.SetActive(false);
+        }
+
+        // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
+        // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
+        if (Input.GetKeyDown("c"))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            player.canMove = false;
+            uiOverlay.SetActive(true);
+        }
     }
 
     // Ändert die Farbe des Pointers auf rot. Dadurch wird gezeigt, dass ein Element benutzt werden kann.
@@ -96,6 +113,6 @@ public class PointerController : MonoBehaviour
     {
         isActive = false;
         uiCrosshair.color = Color.white;
-        tooltip.text = "";
+        tooltip.text = "Nähere dich einem Objekt um mit ihm zu interagieren.";
     }
 }
