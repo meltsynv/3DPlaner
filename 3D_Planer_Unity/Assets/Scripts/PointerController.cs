@@ -30,7 +30,7 @@ public class PointerController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                setSelectedBox(null);
+                SetSelectedBox(null);
                 isPickecUp = false;
             }
         }
@@ -56,19 +56,19 @@ public class PointerController : MonoBehaviour
                                        "Li. Maus = Cursor fangen";
 
                         // Mit Taste 'L' lassen sich Objekte löschen
-                        if (Input.GetKeyDown("l")) Destroy(getSelectedBox(hit).gameObject);
+                        if (Input.GetKeyDown("l")) Destroy(GetSelectedBox(hit).gameObject);
 
                         // Mit Taste 'T' lassen sich Objekte drehen
                         if (Input.GetKeyDown("t"))
                         {
-                            getSelectedBox(hit).transform.Rotate(Vector3.up, rotationAngle);
-                            setSelectedBox(null);
+                            GetSelectedBox(hit).transform.Rotate(Vector3.up, rotationAngle);
+                            SetSelectedBox(null);
                         }
 
                         // Mit rechter Maustaste lassen sich Objekte bewegen
                         if (Input.GetMouseButtonDown(1))
                         {
-                            getSelectedBox(hit);
+                            SetSelectedBox(GetSelectedBox(hit));
                             isPickecUp = true;
                         }
                     }
@@ -134,13 +134,13 @@ public class PointerController : MonoBehaviour
     }
 
     // gibt die Box zurück, welche vom Hit erfasst wurde
-    private BoxController getSelectedBox(RaycastHit hit)
+    private BoxController GetSelectedBox(RaycastHit hit)
     {
         return hit.transform.gameObject.GetComponent<BoxController>();
     }
 
     // Setter für die selectedBox
-    private void setSelectedBox(BoxController box)
+    private void SetSelectedBox(BoxController box)
     {
         selectedBox = box;
     }
