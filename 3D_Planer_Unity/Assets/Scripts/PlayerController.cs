@@ -3,22 +3,6 @@
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public bool canMove = true;
-
-    private CharacterController characterController;
-
-    // Geschwindigkeit der Maus, je höher, desto stärker ändert sich die Blickrichtung bei Mausbewegung
-    public float lookSpeed = 2.0f;
-
-    // Sichtfeld des Players
-    public float lookXLimit = 45.0f;
-    private Vector3 moveDirection = Vector3.zero;
-    public Camera playerCamera;
-    private Vector2 rotation = Vector2.zero;
-
-    // Laufgeschwindigkeit des Player
-    public float speed = 7.5f;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -62,4 +46,24 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotation.x, 0, 0);
         transform.eulerAngles = new Vector2(0, rotation.y);
     }
+
+    #region Variables
+
+    public bool canMove = true;
+
+    private CharacterController characterController;
+
+    // Geschwindigkeit der Maus, je höher, desto stärker ändert sich die Blickrichtung bei Mausbewegung
+    public float lookSpeed = 2.0f;
+
+    // Sichtfeld des Players
+    public float lookXLimit = 45.0f;
+    private Vector3 moveDirection = Vector3.zero;
+    public Camera playerCamera;
+    private Vector2 rotation = Vector2.zero;
+
+    // Laufgeschwindigkeit des Player
+    public float speed = 7.5f;
+
+    #endregion
 }

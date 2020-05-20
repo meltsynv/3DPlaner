@@ -3,16 +3,6 @@ using UnityEngine.UI;
 
 public class PointerController : MonoBehaviour
 {
-    private BoxController grabbingBox;
-    private bool isActive;
-    public PlayerController player;
-
-    [SerializeField] private float rayLength = 2f;
-    public int rotationAngle = 15;
-    public Text tooltip;
-    public Image uiCrosshair;
-    public GameObject uiOverlay;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -115,4 +105,18 @@ public class PointerController : MonoBehaviour
         uiCrosshair.color = Color.white;
         tooltip.text = "Nähere dich einem Objekt um mit ihm zu interagieren.";
     }
+
+    #region Variables
+
+    private BoxController grabbingBox;
+    private bool isActive;
+    public PlayerController player;
+
+    [SerializeField] private float rayLength = 2f;
+    public int rotationAngle = 15;
+    public Text tooltip;
+    public Image uiCrosshair;
+    public GameObject uiOverlay;
+
+    #endregion
 }
