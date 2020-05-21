@@ -3,19 +3,10 @@ using UnityEngine.UI;
 
 public class PointerController : MonoBehaviour
 {
-    private BoxController grabbingBox;
-    private bool isActive;
-    public PlayerController player;
-
-    [SerializeField] private float rayLength = 2f;
-    public int rotationAngle = 15;
-    public Text tooltip;
-    public Image uiCrosshair;
-    public GameObject uiOverlay;
-
     // Start is called before the first frame update
     private void Start()
     {
+        selectedBox = null;
         // Setzt die Farbe des Pointers auf weiß.
         uiCrosshair.color = Color.white;
         // Der Mauszeiger wird beim Start gelocked, damit er nicht stört.
@@ -25,81 +16,108 @@ public class PointerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        RaycastHit hit;
-        // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
+        // Falls eine Box aufgehoben wurde wird die Gravitation für diese Box abgestellt.
+        // Sie fällt also zwischen den einzelnen Update-Zyklen nicht mehr runter
+        if (isPickecUp && selectedBox != null)
         {
-            if (hit.transform.gameObject.GetComponent<BoxController>() != null)
+            selectedBox.transform.position =
+                transform.position + transform.forward * 2 + Vector3.up * 0.5f;
+            selectedBox.transform.localEulerAngles = transform.localEulerAngles;
+            selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = false;
+
+            tooltip.text = "Re. Maus = Element ablegen";
+            // Wenn rechte Maustaste gedrückt wird wird Objekt abgelegt
+            if (Input.GetMouseButtonDown(1))
             {
-                // setzt Pointer auf rot
-                if (!isActive) SetCrosshairActive();
-
-                // Falls eine Box ausgewählt ist wird diese vor dem Player angeheftet um diese zu bewegen
-                if (grabbingBox != null)
-                {
-                    grabbingBox.transform.position =
-                        transform.position + transform.forward * 2 + Vector3.up * 0.5f;
-                    grabbingBox.transform.localEulerAngles = transform.localEulerAngles;
-
-                    tooltip.text = "Re. Maus = Element ablegen";
-                    // Wenn rechte Maustaste gedrückt wird wird Objekt abgelegt
-                    if (Input.GetMouseButtonDown(1)) grabbingBox = null;
-                }
-                else
-                {
-                    // zeigt Tooltip an
-                    tooltip.text = "Re. Maus = Element aufnehmen \n" +
-                                   "Taste T = Element drehen \n" +
-                                   "Taste L = Element löschen \n" +
-                                   "Taste ESC = Cursor freigeben \n" +
-                                   "Li. Maus = Cursor fangen";
-
-                    // Mit Taste 'L' lassen sich Objekte löschen
-                    if (Input.GetKeyDown("l"))
-                    {
-                        grabbingBox = hit.transform.gameObject.GetComponent<BoxController>();
-                        Destroy(grabbingBox.gameObject);
-                    }
-
-                    // Mit Taste 'T' lassen sich Objekte drehen
-                    if (Input.GetKeyDown("t"))
-                    {
-                        grabbingBox = hit.transform.gameObject.GetComponent<BoxController>();
-                        grabbingBox.transform.Rotate(Vector3.up, rotationAngle);
-                        grabbingBox = null;
-                    }
-
-                    // Mit rechter Maustaste lassen sich Objekte bewegen
-                    if (Input.GetMouseButtonDown(1))
-                        grabbingBox = hit.transform.gameObject.GetComponent<BoxController>();
-                }
+                selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                SetSelectedBox(null);
+                isPickecUp = false;
             }
         }
-        else if (isActive)
+        else
         {
-            SetCrosshairNormal();
-        }
+            RaycastHit hit;
+            // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
+            if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
+            {
+                if (hit.transform.gameObject.GetComponent<FurnitureController>() != null)
+                {
+                    // setzt Pointer auf rot
+                    if (!isActive) SetCrosshairActive();
 
-        //Beim Drücken von 'esc' wird der Mauszeiger freigegeben (kann im Debugmodus benutzt werden um diesen zu beenden)
-        if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
+                    // Falls keine Box rumgetragen wird
+                    if (selectedBox == null)
+                    {
+                        // zeigt Tooltip an
+                        tooltip.text = "Re. Maus = Element aufnehmen \n" +
+                                       "Taste T = Element drehen \n" +
+                                       "Taste L = Element löschen \n" +
+                                       "Taste ESC = Cursor freigeben \n" +
+                                       "Li. Maus = Cursor fangen";
 
-        // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-        if (Input.GetMouseButtonUp(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            player.canMove = true;
-            uiOverlay.SetActive(false);
-        }
+                        // Mit Taste 'L' lassen sich Objekte löschen
+                        if (Input.GetKeyDown("l")) Destroy(GetSelectedBox(hit).gameObject);
 
-        // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
-        // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
-        if (Input.GetKeyDown("c"))
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            player.canMove = false;
-            uiOverlay.SetActive(true);
+                        // Mit Taste 'T' lassen sich Objekte drehen
+                        if (Input.GetKeyDown("t"))
+                        {
+                            GetSelectedBox(hit).transform.Rotate(Vector3.up, rotationAngle);
+                            SetSelectedBox(null);
+                        }
+
+                        // Mit rechter Maustaste lassen sich Objekte bewegen
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            SetSelectedBox(GetSelectedBox(hit));
+                            isPickecUp = true;
+                        }
+                    }
+                }
+            }
+            else if (isActive) // setzt den Pointer zurück auf normal, wenn kein Objekt in der Nähe ist
+            {
+                SetCrosshairNormal();
+            }
+
+            //Beim Drücken von 'esc' wird der Mauszeiger freigegeben (kann im Debugmodus benutzt werden um diesen zu beenden)
+            if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
+
+            // Beim Drücken der linken Maustaste wird der Cursor gelocked.
+            if (Input.GetMouseButtonUp(0)) EnableMovement();
+
+            // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
+            // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
+            if (Input.GetKeyDown("c")) DisableMovement();
         }
     }
+
+    public void PlaceItem(GameObject gameObject)
+    {
+        SetSelectedBox(gameObject.GetComponent<FurnitureController>());
+        selectedBox.transform.position =
+            transform.position + transform.forward * 2 + Vector3.up * 0.5f;
+        selectedBox.transform.localEulerAngles = transform.localEulerAngles;
+        selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        isPickecUp = true;
+        EnableMovement();
+    }
+
+    #region Variables
+
+    private FurnitureController selectedBox;
+    private bool isActive;
+    private bool isPickecUp;
+    public PlayerController player;
+
+    [SerializeField] private float rayLength = 5f;
+    public int rotationAngle = 15;
+    public Text tooltip;
+    public Image uiCrosshair;
+    public GameObject uiOverlay;
+
+    #endregion
+
+    #region helperMethods
 
     // Ändert die Farbe des Pointers auf rot. Dadurch wird gezeigt, dass ein Element benutzt werden kann.
     private void SetCrosshairActive()
@@ -115,4 +133,32 @@ public class PointerController : MonoBehaviour
         uiCrosshair.color = Color.white;
         tooltip.text = "Nähere dich einem Objekt um mit ihm zu interagieren.";
     }
+
+    // gibt die Box zurück, welche vom Hit erfasst wurde
+    private FurnitureController GetSelectedBox(RaycastHit hit)
+    {
+        return hit.transform.gameObject.GetComponent<FurnitureController>();
+    }
+
+    // Setter für die selectedBox
+    private void SetSelectedBox(FurnitureController box)
+    {
+        selectedBox = box;
+    }
+
+    private void EnableMovement()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        player.canMove = true;
+        uiOverlay.SetActive(false);
+    }
+
+    private void DisableMovement()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        player.canMove = false;
+        uiOverlay.SetActive(true);
+    }
+
+    #endregion
 }
