@@ -84,7 +84,7 @@ public class PointerController : MonoBehaviour
         if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
 
         // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Cursor.lockState = CursorLockMode.Locked;
             player.canMove = true;
