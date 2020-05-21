@@ -40,7 +40,7 @@ public class PointerController : MonoBehaviour
             // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
             if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
             {
-                if (hit.transform.gameObject.GetComponent<BoxController>() != null)
+                if (hit.transform.gameObject.GetComponent<FurnitureController>() != null)
                 {
                     // setzt Pointer auf rot
                     if (!isActive) SetCrosshairActive();
@@ -83,27 +83,28 @@ public class PointerController : MonoBehaviour
             if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
 
             // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-            if (Input.GetMouseButtonDown(0))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                player.canMove = true;
-                uiOverlay.SetActive(false);
-            }
+            if (Input.GetMouseButtonUp(0)) EnableMovement();
 
             // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
             // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
-            if (Input.GetKeyDown("c"))
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                player.canMove = false;
-                uiOverlay.SetActive(true);
-            }
+            if (Input.GetKeyDown("c")) DisableMovement();
         }
+    }
+
+    public void PlaceItem(GameObject gameObject)
+    {
+        SetSelectedBox(gameObject.GetComponent<FurnitureController>());
+        selectedBox.transform.position =
+            transform.position + transform.forward * 2 + Vector3.up * 0.5f;
+        selectedBox.transform.localEulerAngles = transform.localEulerAngles;
+        selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        isPickecUp = true;
+        EnableMovement();
     }
 
     #region Variables
 
-    private BoxController selectedBox;
+    private FurnitureController selectedBox;
     private bool isActive;
     private bool isPickecUp;
     public PlayerController player;
@@ -134,15 +135,29 @@ public class PointerController : MonoBehaviour
     }
 
     // gibt die Box zurück, welche vom Hit erfasst wurde
-    private BoxController GetSelectedBox(RaycastHit hit)
+    private FurnitureController GetSelectedBox(RaycastHit hit)
     {
-        return hit.transform.gameObject.GetComponent<BoxController>();
+        return hit.transform.gameObject.GetComponent<FurnitureController>();
     }
 
     // Setter für die selectedBox
-    private void SetSelectedBox(BoxController box)
+    private void SetSelectedBox(FurnitureController box)
     {
         selectedBox = box;
+    }
+
+    private void EnableMovement()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        player.canMove = true;
+        uiOverlay.SetActive(false);
+    }
+
+    private void DisableMovement()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        player.canMove = false;
+        uiOverlay.SetActive(true);
     }
 
     #endregion
