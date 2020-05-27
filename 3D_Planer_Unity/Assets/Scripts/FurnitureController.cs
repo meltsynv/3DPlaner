@@ -7,9 +7,18 @@ public class FurnitureController : MonoBehaviour
      */
     public GameObject obj;
 
+    private GameObject player;
 
     public void InstanciateObject()
     {
-        Instantiate(obj);
+        if (player == null) SetPlayer();
+
+        var pos = player.transform.position + player.transform.forward * 2 + Vector3.up * 0.5f;
+        Instantiate(obj, pos, player.transform.rotation);
+    }
+
+    private void SetPlayer()
+    {
+        player = GameObject.Find("Player");
     }
 }
