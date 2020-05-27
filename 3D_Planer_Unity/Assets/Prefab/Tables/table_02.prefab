@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1886884909961840379}
   - component: {fileID: -3276286847419572487}
-  - component: {fileID: -1411159933416148681}
+  - component: {fileID: -1912751280916910673}
   - component: {fileID: 842943529133412520}
   m_Layer: 0
-  m_Name: table_06
+  m_Name: table_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3203420586185651432}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -50,7 +50,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-1411159933416148681
+--- !u!65 &-1912751280916910673
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,8 +61,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0350924, y: 2.2787538, z: 5.97516}
-  m_Center: {x: 0.007992268, y: 1.1029236, z: -0.0093643665}
+  m_Size: {x: 4.8286843, y: 2.394947, z: 4.52736}
+  m_Center: {x: -0.014840364, y: 1.0833092, z: -0.000113487244}
 --- !u!114 &842943529133412520
 MonoBehaviour:
   m_ObjectHideFlags: 0
