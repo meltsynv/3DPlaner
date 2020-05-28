@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PointerController : MonoBehaviour
@@ -145,6 +146,29 @@ public class PointerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         player.canMove = false;
+    }
+
+    public void SetMatieral(Material material)
+    {
+        Debug.Log("Farbe ändern");
+
+        RaycastHit hit;
+        // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
+        {
+            selectedBox = hit.collider.GetComponent<FurnitureController>();
+            var renderers = selectedBox.GetComponentsInChildren<Renderer>();
+            try
+            {
+                foreach (var renderer in renderers) renderer.material = material;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            selectedBox = null;
+        }
     }
 
     #endregion
