@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8978175259267628786}
   - component: {fileID: 6850147110593464407}
   m_Layer: 0
-  m_Name: table_07
+  m_Name: table_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85cafa0939c41bf43a5425c5660956b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 0}
+  obj: {fileID: 2769854760100457414}
 --- !u!1 &8537921735541821019
 GameObject:
   m_ObjectHideFlags: 0
