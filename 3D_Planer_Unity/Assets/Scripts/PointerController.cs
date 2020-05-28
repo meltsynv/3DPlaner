@@ -150,8 +150,6 @@ public class PointerController : MonoBehaviour
 
     public void SetMatieral(Material material)
     {
-        Debug.Log("Farbe ändern");
-
         RaycastHit hit;
         // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
