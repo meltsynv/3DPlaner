@@ -150,14 +150,12 @@ public class PointerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         player.canMove = true;
-        uiOverlay.SetActive(false);
     }
 
     private void DisableMovement()
     {
         Cursor.lockState = CursorLockMode.Confined;
         player.canMove = false;
-        uiOverlay.SetActive(true);
     }
 
     #endregion
