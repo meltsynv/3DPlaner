@@ -83,23 +83,12 @@ public class PointerController : MonoBehaviour
             if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
 
             // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-            if (Input.GetMouseButtonUp(0)) EnableMovement();
+            // if (Input.GetMouseButtonUp(0)) EnableMovement();
 
             // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
             // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
             if (Input.GetKeyDown("c")) DisableMovement();
         }
-    }
-
-    public void PlaceItem(GameObject gameObject)
-    {
-        SetSelectedBox(gameObject.GetComponent<FurnitureController>());
-        selectedBox.transform.position =
-            transform.position + transform.forward * 2 + Vector3.up * 0.5f;
-        selectedBox.transform.localEulerAngles = transform.localEulerAngles;
-        selectedBox.gameObject.GetComponent<Rigidbody>().useGravity = false;
-        isPickecUp = true;
-        EnableMovement();
     }
 
     #region Variables
@@ -146,13 +135,13 @@ public class PointerController : MonoBehaviour
         selectedBox = box;
     }
 
-    private void EnableMovement()
+    public void EnableMovement()
     {
         Cursor.lockState = CursorLockMode.Locked;
         player.canMove = true;
     }
 
-    private void DisableMovement()
+    public void DisableMovement()
     {
         Cursor.lockState = CursorLockMode.Confined;
         player.canMove = false;
