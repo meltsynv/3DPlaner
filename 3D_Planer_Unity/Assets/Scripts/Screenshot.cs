@@ -22,6 +22,6 @@ public class Screenshot : MonoBehaviour
         yield return new WaitForEndOfFrame();
         
         //Instantiate (blink, new Vector2(0f, 0f), Quaternion.identity); --> Blitz s.o.
-        
+         
     }
 }
