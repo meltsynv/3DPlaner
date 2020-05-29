@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = new Vector2(0, rotation.y);
     }
 
+    public void PlaceOnSecondFloor()
+    {
+        //@Todo in zweitem Geschoss platzieren
+        Debug.Log("Player in zweitem Geschoss platzieren");
+    }
+
     #region Variables
 
     public bool canMove = true;

@@ -7,11 +7,10 @@ public class PointerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        selectedBox = null;
-        // Setzt die Farbe des Pointers auf weiß.
-        uiCrosshair.color = Color.white;
-        // Der Mauszeiger wird beim Start gelocked, damit er nicht stört.
-        Cursor.lockState = CursorLockMode.Locked;
+        // selectedBox = null;
+        // // Setzt die Farbe des Pointers auf weiß.
+        // uiCrosshair.color = Color.white;
+        DisableMovement();
     }
 
     // Update is called once per frame
