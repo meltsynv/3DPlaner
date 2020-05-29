@@ -83,9 +83,6 @@ public class PointerController : MonoBehaviour
             //Beim Drücken von 'esc' wird der Mauszeiger freigegeben (kann im Debugmodus benutzt werden um diesen zu beenden)
             if (Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
 
-            // Beim Drücken der linken Maustaste wird der Cursor gelocked.
-            // if (Input.GetMouseButtonUp(0)) EnableMovement();
-
             // Mit Taste 'C' soll sich das Charakterfenster/Möbelfenster öffnen.
             // Die Bewegung des Spielers soll währenddessen ausgeschaltet sein
             if (Input.GetKeyDown("c")) DisableMovement();
@@ -140,12 +137,14 @@ public class PointerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         player.canMove = true;
+        uiOverlay.SetActive(false);
     }
 
     public void DisableMovement()
     {
         Cursor.lockState = CursorLockMode.Confined;
         player.canMove = false;
+        uiOverlay.SetActive(true);
     }
 
     public void SetMatieral(Material material)
