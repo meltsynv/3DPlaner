@@ -1,5 +1,9 @@
 # 3DPlaner
-### Unity Projekt im Modul VRAR an der HRW
+### Unity Projekt im Modul VRAR an der HRW von
+* Nadine Beka
+* Markus Kerkhoff
+* Viktor Meltsyn
+* Lisa Wolff
 ---
 ### Installation
 * git clone https://github.com/meltsynv/3DPlaner.git
