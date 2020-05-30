@@ -11,7 +11,7 @@
 * Ordner ```3D_Planer_Unity``` auswählen
 * wenn keine Scene geladen wurde, dann ```SampleScene``` öffnen
 * play drücken
----
+
 ### Projekt Beschreibung
 > Der 3D Planer wird als inneneinrichtungs Tool genutzt.
 > Zur Auswahl stehen dir zwei Umrisse einer Wohnung zurverfügung, aus denen du eine wählen kannst.
@@ -25,12 +25,12 @@
 > 4. ablegen --> rechte Maustaste
 > 5. Farbe verändern --> UI
 > 6. Screenshot erstellen --> UI
----
+
 ### Ausblick
 > Die grundlegenden Funktionen, die im Exposee beschrieben wurden, haben wir erfült.
 > Einbindung einer reaslistischen Belichtung.
 > Ein weiteres Tool, um sein eigenen Umriss anzufertigen und zu laden.
----
+
 ### Fazit
 > Für die Abgabe haben wir hier auf zusätzliche Plugins verzichtet, da es zu einem nicht in die Bewertung eingeflossen wäre,
 > und dadurch konnten wir Unity besser erforschen.
