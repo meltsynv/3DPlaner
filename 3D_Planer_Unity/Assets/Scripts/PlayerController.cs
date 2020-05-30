@@ -49,8 +49,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlaceOnSecondFloor()
     {
-        //@Todo in zweitem Geschoss platzieren
-        Debug.Log("Player in zweitem Geschoss platzieren");
+        characterController.transform.localPosition = new Vector3(-481, -277, 27);
     }
 
     #region Variables
