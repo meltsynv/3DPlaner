@@ -1,9 +1,4 @@
 # 3DPlaner
-* Unity öffnen
-* ```Add```
-* Ordner ```3D_Planer_Unity``` auswählen
-
-# 3DPlaner
 ### Unity Projekt im Modul VRAR an der HRW
 ---
 ### Installation
