@@ -149,9 +149,9 @@ public class PointerController : MonoBehaviour
     public void SetMatieral(Material material)
     {
         RaycastHit hit;
-        // Sendet einen Ray aus um zu gucken, ob ein Objekt angewählt werden kann
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
         {
+            // ändert das Material der Kindobjekte
             selectedBox = hit.collider.GetComponent<FurnitureController>();
             var renderers = selectedBox.GetComponentsInChildren<Renderer>();
             try

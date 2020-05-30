@@ -13,6 +13,7 @@ public class FurnitureController : MonoBehaviour
     {
         if (player == null) SetPlayer();
 
+        // positioniert das Objekt vor dem Player
         var pos = player.transform.position + player.transform.forward * 2 + Vector3.up * 0.5f;
         Instantiate(obj, pos, player.transform.rotation);
     }
