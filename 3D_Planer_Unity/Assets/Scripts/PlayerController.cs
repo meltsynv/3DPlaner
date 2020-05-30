@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = new Vector2(0, rotation.y);
     }
 
+    // falls zu Beginn der zweite Grundriss ausgewählt wird, wird der Player ins zweite Geschoss teleportiert
     public void PlaceOnSecondFloor()
     {
         characterController.transform.localPosition = new Vector3(-481, -277, 27);
