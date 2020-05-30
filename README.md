@@ -24,13 +24,11 @@
 > mit der Maus veränderst du den Blickwinkel.
 > Mit unserem UI kannst du mit der Umwelt interagieren,
 > so hast du folgende zusätzliche Funktionen:
-> Möbel:
 > 1. laden --> UI
 > 2. drehen --> Taste t
 > 3. aufheben --> rechte Maustaste
 > 4. ablegen --> rechte Maustaste
 > 5. Farbe verändern --> UI
-> weitere Funktionen:
 > 6. Screenshot erstellen --> UI
 ---
 ### Ausblick
@@ -41,5 +39,5 @@
 ### Fazit
 > Für die Abgabe haben wir hier auf zusätzliche Plugins verzichtet, da es zu einem nicht in die Bewertung eingeflossen wäre,
 > und dadurch konnten wir Unity besser erforschen.
-> Für die Modelle (Inventar) haben wir die Webseite [title](https://www.blendswap.com) benutzt.
+> Für die Modelle (Inventar) haben wir die Webseite [blendswap](https://www.blendswap.com) benutzt.
 > Dadurch sind wir schnell an fertige Möbel gelangt, weitere Anpassungen, oder Möbel, die uns fähleten haben wir selbst erstellt.
