@@ -52,8 +52,8 @@ public class PointerController : MonoBehaviour
                         tooltip.text = "Re. Maus = Element aufnehmen \n" +
                                        "Taste T = Element drehen \n" +
                                        "Taste L = Element löschen \n" +
-                                       "Taste ESC = Cursor freigeben \n" +
-                                       "Li. Maus = Cursor fangen";
+                                       "Taste C = Möbel Wahl | Farbe \n" +
+                                       "Taste ESC = Cursor freigeben \n";
 
                         // Mit Taste 'L' lassen sich Objekte löschen
                         if (Input.GetKeyDown("l")) Destroy(GetSelectedBox(hit).gameObject);
@@ -117,7 +117,7 @@ public class PointerController : MonoBehaviour
     {
         isActive = false;
         uiCrosshair.color = Color.white;
-        tooltip.text = "Nähere dich einem Objekt um mit ihm zu interagieren.";
+        tooltip.text = "Nähere dich einem Objekt um mit ihm zu interagieren.\nMit der Taste C kannst du neue Möbel platzieren.";
     }
 
     // gibt die Box zurück, welche vom Hit erfasst wurde
